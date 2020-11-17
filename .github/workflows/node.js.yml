@@ -29,5 +29,8 @@ jobs:
         npm ci
         npm run build --if-present
         npm test
-      env:
-        CI: true
+    - name: build docker image
+      id: docker_build
+      run: |
+        docker build -t xebxke/whatever:${BRANCH#refs/heads/}-$COMMIT .
+        echo "::set-output name=docker_tag::xbexke/whatever:$BRANCH#refs/heads/}-$COMMIT"
